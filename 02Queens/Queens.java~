@@ -1,0 +1,17 @@
+public class Queens{
+    int size;
+    int[][] gridz;
+
+    public Queens(int length){
+	size = length;
+	gridz = new  int [length][length];
+    }
+    public boolean addQueens(int[][] grid){
+	
+    }
+    public boolean removeQueens(int[][] grid){
+    }
+    
+    public void (int[][] grid,int row,int col,int increment){
+	grid[row][col]+=increment;
+    }
