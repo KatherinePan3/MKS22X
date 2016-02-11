@@ -12,17 +12,18 @@ public class Queens{
 	}
     }
     public boolean solve(){
-	if(grid[size-1][size-2]!=0 && grid[size-1][size-1]!=0
-		
-	
+        return solveH(0);			
     }
     
     private boolean solveH(int col){
+	if(col >=size){
+	    return true;
+	}
 	for(int i=0;i<size;i++){
-	    if(grid[i][col]==0){
-		addQueens(i,col);
+	    if(addQueens(i,col) && solveH(col+1)){
 		return true;
 	    }
+	    removeQueens(i,col);
 	}
 	return false;
     }
@@ -44,6 +45,7 @@ public class Queens{
 	}
 	System.out.println(ans);
     }
+
     public boolean addQueens(int row, int col){
         if(grid[row][col]!=0){
 	    return false;}
@@ -96,9 +98,12 @@ public class Queens{
 	Queens b = new Queens(5);
 	System.out.println(b);
 	b.addQueens(3,0);
-	b.addQueen(0,1);
+	b.addQueens(0,1);
 	System.out.println(b);
+	b.printSolution();
 	b.removeQueens(3,0);
 	System.out.println(b);
+	
 
+}
 }
