@@ -1,4 +1,4 @@
-public class Recursion{
+public class Recursion implements hw01{
     public String name(){
 	return "Pan,Katherine";
     }
@@ -11,7 +11,7 @@ public class Recursion{
 	}
     }
     public double helper(double n, double guess){
-	if(n/guess == guess){
+	if((int)(n/guess) == (int)guess){
 	    return guess;}
 	else{
 	    return helper(n,(n/guess+guess)/2);

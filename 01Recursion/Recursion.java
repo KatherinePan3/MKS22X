@@ -11,7 +11,7 @@ public class Recursion implements hw01{
 	}
     }
     public double helper(double n, double guess){
-	if((int)(n/guess) == (int)guess){
+	if(Math.abs(n-guess*guess)< 0.000000000001){
 	    return guess;}
 	else{
 	    return helper(n,(n/guess+guess)/2);
