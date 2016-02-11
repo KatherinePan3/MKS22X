@@ -11,6 +11,22 @@ public class Queens{
 	    }
 	}
     }
+    public boolean solve(){
+	if(grid[size-1][size-2]!=0 && grid[size-1][size-1]!=0
+		
+	
+    }
+    
+    private boolean solveH(int col){
+	for(int i=0;i<size;i++){
+	    if(grid[i][col]==0){
+		addQueens(i,col);
+		return true;
+	    }
+	}
+	return false;
+    }
+		
 
 
     public void printSolution(){
@@ -66,7 +82,23 @@ public class Queens{
     }
 
     public String toString(){
-	
+	String ans = "";
+	for(int i=0;i<size;i++){
+	    for(int j=0;j<size;j++){
+		ans+=grid[i][j]+"\t";
+	    }
+	    ans+="\n";
+	}
+	return ans;	
     }
+
+    public static void main(String[]args){
+	Queens b = new Queens(5);
+	System.out.println(b);
+	b.addQueens(3,0);
+	b.addQueen(0,1);
+	System.out.println(b);
+	b.removeQueens(3,0);
+	System.out.println(b);
 
 }
