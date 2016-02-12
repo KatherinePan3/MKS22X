@@ -1,8 +1,8 @@
-public class Queens{
-   private  int size;
-   private  int[][] grid;
+public class QueenBoard{
+    private  int size;
+    private  int[][] grid;
 
-    public Queens(int length){
+    public QueenBoard(int length){
 	size=length;
 	grid = new  int [length][length];
 	for(int i=0;i<length;i++){
@@ -20,10 +20,10 @@ public class Queens{
 	    return true;
 	}
 	for(int i=0;i<size;i++){
-	    if(addQueens(i,col) && solveH(col+1)){
+	    if(addQueen(i,col) && solveH(col+1)){
 		return true;
 	    }
-	    removeQueens(i,col);
+	    removeQueen(i,col);
 	}
 	return false;
     }
@@ -46,7 +46,7 @@ public class Queens{
 	System.out.println(ans);
     }
 
-    public boolean addQueens(int row, int col){
+    public boolean addQueen(int row, int col){
         if(grid[row][col]!=0){
 	    return false;}
 	int increment = 1;
@@ -65,20 +65,20 @@ public class Queens{
     }
 	    
 
-	public boolean removeQueens(int row, int col){
-	    if(grid[row][col]!=1){
-		return false;}
-	    int increment = 1;
-	    grid[row][col]=1;
-	    while(col+increment<size){
-		grid[row][col+increment]++;
-		if(row+increment<size){
-		    grid[row+increment][col+increment]++;
-		}
-		if(row-increment>=0){
-		    grid[row-increment][col+increment]++;
-		}
-		increment ++;
+    public boolean removeQueen(int row, int col){
+	if(grid[row][col]!=1){
+	    return false;}
+	int increment = 1;
+	grid[row][col]=1;
+	while(col+increment<size){
+	    grid[row][col+increment]++;
+	    if(row+increment<size){
+		grid[row+increment][col+increment]++;
+	    }
+	    if(row-increment>=0){
+		grid[row-increment][col+increment]++;
+	    }
+	    increment ++;
 	}
 	return true;
     }
@@ -96,14 +96,10 @@ public class Queens{
 
     public static void main(String[]args){
 	Queens b = new Queens(5);
-	System.out.println(b);
-	b.addQueens(3,0);
-	b.addQueens(0,1);
+        b.solve();
 	System.out.println(b);
 	b.printSolution();
-	b.removeQueens(3,0);
-	System.out.println(b);
 	
 
-}
+    }
 }
