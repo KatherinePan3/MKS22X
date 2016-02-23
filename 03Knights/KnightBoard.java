@@ -1,21 +1,23 @@
 public class KnightBoard{
-    private int size;
+    private int Ycols;
+    private int Xrows;
     private int[][] grid;
     private int[] movex;
     private int[] movey;
-    public KnightBoard(int n){
-	size = n;
-	movex=new int[] {2,1,-1,-2,-2,-1,1,2};
-	movey=new int[] {1,2,2,1,-1,-2,-2,-1};
-	grid = new int[n][n];
-	for(int i=0;i<size;i++){
-	    for(int j=0;j<size;j++){
+    public KnightBoard(int cols,int rows){
+	Ycols = cols;
+	Xrows = rows;
+	movex=new int[] {1,2,-1,1,-2,-2,-1,2};
+	movey=new int[] {2,1,2,-2,1,-1,-2,-1};
+	grid = new int[rows][cols];
+	for(int i=0;i<Xrows;i++){
+	    for(int j=0;j<Ycols;j++){
 		grid[i][j]=-1;
 	    }
 	}
     }
     private boolean avaliable(int x,int y){
-	return(x>=0 && x<size && y>=0 && y<size && grid[x][y] ==-1);
+	return(x>=0 && x<Xrows && y>=0 && y<Ycols && grid[x][y] ==-1);
     }
 		       
 
@@ -34,9 +36,9 @@ public class KnightBoard{
     public boolean solveH(int x,int y,int moves){
 	int nextX;
 	int nextY;
-	if(moves == size*size){
-	    for(int i=0;i<size;i++){
-		for(int j=0;j<size;j++){
+	if(moves == Xrows*Ycols){
+	    for(int i=0;i<Xrows;i++){
+		for(int j=0;j<Ycols;j++){
 		    if(grid[i][j]==-1){
 			grid[i][j]=moves;}
 		}
@@ -67,17 +69,20 @@ public class KnightBoard{
 
     public void printSolution(){
 	String ans = "";
-	if(size<10){
-	    for(int i=0;i<size;i++){
-		for(int j=0;j<size;j++){
-		    ans+=grid[i][j]+"\t";
+	if(Xrows*Ycols<10){
+	    for(int i=0;i<Xrows;i++){
+		for(int j=0;j<Ycols;j++){
+		    ans+=grid[i][j]+" ";
 		}
 		ans+="\n";
 	    }
 	}else{
-	    for(int i=0;i<size;i++){
-		for(int j=0;j<size;j++){
-		    ans+="_" +grid[i][j]+"\t";
+	    for(int i=0;i<Xrows;i++){
+		for(int j=0;j<Ycols;j++){
+		    if(grid[i][j]<10){
+			ans+="_" +grid[i][j]+" ";}
+		    else{
+			ans+=grid[i][j]+" ";}
 		}
 		ans+="\n";
 	    }
@@ -88,7 +93,7 @@ public class KnightBoard{
     }
     
     public static void main(String[]args){
-	KnightBoard b = new KnightBoard(12);
+	KnightBoard b = new KnightBoard(5,6);
 	b.solve();
 	b.printSolution();
     }
