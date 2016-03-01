@@ -20,7 +20,10 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-        //COMPLETE CONSTRUCTOR
+	Scanner sc = new Scanner(filename);
+	String mazeStr = "";
+	int row=0;
+	int col=0;
     }
 
 
