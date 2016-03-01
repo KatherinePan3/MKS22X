@@ -89,15 +89,19 @@ public class Maze{
 	    return true;
 	}
 
-	if(maze[x][y]=='#' || maze[x][y]=='.' || maze[x][y]=='@'){
-	    return false;}
-	else{
+	if(maze[x][y]!='#' || maze[x][y]!='.' || maze[x][y]!='@'){
 	    for(int i=0;i<2;i++){
-		if(solve(x+move[i],y) || solve(x,y+move[i])){
+		if(solve(x+move[i],y)){
 		    return true;
-		}
+		    }
+		if(solve(x,y+move[i])){
+			return true;
+		    }
 	    }
 	}
+		    
+			
+	
 	maze[x][y] = '.';
         //COMPLETE SOLVE
 

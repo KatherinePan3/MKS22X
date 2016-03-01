@@ -7,6 +7,7 @@ public class Maze{
     private char[][]maze;
     private int startx,starty;
     private boolean animate;
+    private int[] move;
 
     /*Constructor loads a maze text file.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -20,11 +21,35 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-	Scanner sc = new Scanner(filename);
-	String mazeStr = "";
-	int row=0;
-	int col=0;
+	animate=ani;
+	move=new int[] {1,-1};
+	startx = -1;
+	try{
+	    Scanner sc = new Scanner(new File(filename));
+	    ArrayList<String> mazeStr = new ArrayList<String> ();
+	    int row=0;
+	    int col=0;
+	    while(sc.hasNextLine()){
+		mazeStr.add(sc.nextLine());
+	    }
+	    row=mazeStr.size();
+	    col=mazeStr.get(0).length();
+	    maze = new char[row][col];
+	    for(int i=0;i<row;i++){
+		String str = mazeStr.get(i);
+		for(int j=0;j<col;j++){
+		    maze[i][j]=str.charAt(j);
+		    if(maze[i][j]=='S'){
+			startx=i;
+			starty=j;
+		    }
+		}
+	    }
+	}catch(FileNotFoundException e){
+	    System.out.println("file not found");
+	}
     }
+	
 
 
     /*Main Solve Function
@@ -60,7 +85,20 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
+	if(maze[x][y]=='E'){
+	    return true;
+	}
 
+	if(maze[x][y]=='#' || maze[x][y]=='.' || maze[x][y]=='@'){
+	    return false;}
+	else{
+	    for(int i=0;i<2;i++){
+		if(solve(x+move[i],y) || solve(x,y+move[i])){
+		    return true;
+		}
+	    }
+	}
+	maze[x][y] = '.';
         //COMPLETE SOLVE
 
         return false; //so it compiles
@@ -125,7 +163,10 @@ public class Maze{
     
 
     //END FREE STUFF
-
+    public static void main(String[]args){
+	Maze b = new Maze("maze.txt",true);
+	b.solve();
+    }
 
 
 }
