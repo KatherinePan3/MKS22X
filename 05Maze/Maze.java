@@ -90,61 +90,57 @@ public class Maze{
 	}else{
 	    maze[x][y]='@';
 	}
-
-	if(maze[x][y]!='#' || maze[x][y]!='.' || maze[x][y]!='@'){
+		
 	    for(int i=0;i<2;i++){
-		if(solve(x+move[i],y)){
+		if(isSafe(x+move[i],y) && solve(x+move[i],y)){
+		    //System.out.println("true1");
 		    return true;
 		    }
-		if(solve(x,y+move[i])){
-			return true;
+		if(isSafe(x,y+move[i]) && solve(x,y+move[i])){
+		    //System.out.println("true2");
+		    return true;
 		    }
 	    }
-	}
+	
 		    
 			
 	
 	maze[x][y] = '.';
         //COMPLETE SOLVE
-
+	//	System.out.println("false");
         return false; //so it compiles
     }
 
+    public boolean isSafe(int x,int y){
+	if(maze[x][y]!='#' && maze[x][y]!='.' && maze[x][y]!='@'){
+	    return true;
+	}
+	return false;
+    }
 
 
     //FREE STUFF!!! *you should be aware of this*
-
-
-    public void clearTerminal(){
+ public void clearTerminal(){
         System.out.println(CLEAR_SCREEN);
     }
-
 
     public String toString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
         String ans = "";
-
         if(animate){
-
             ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
-
         }
-        for(int i = 0; i < maxx * maxy; i++){
-            if(i % maxx == 0 && i != 0){
-                ans += "\n";
-            }
-            char c =  maze[i % maxx][i / maxx];
-            if(c == '#'){
-                ans += color(38,47)+c;
-            }else{
-                ans += color(33,40)+c;
-            }
-        }
-        return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
+	for(int i=0;i<maxx;i++){
+	    for(int j=0;j<maxy;j++){
+		ans+=maze[i][j];
+	    }
+	    ans+="\n";
+	}
+	return ans;
     }
-    //MORE FREE STUFF!!! *you can ignore all of this*
 
+    //MORE FREE STUFF!!! *you can ignore all of this*
     //Terminal keycodes to clear the terminal, or hide/show the cursor
     private static final String CLEAR_SCREEN =  "\033[2J";
     private static final String HIDE_CURSOR =  "\033[?25l";
@@ -167,11 +163,15 @@ public class Maze{
     }
 
     
-
     //END FREE STUFF
+
+
+
+  
     public static void main(String[]args){
-	Maze b = new Maze("maze.txt",true);
+	Maze b = new Maze("maze.txt",false);
 	b.solve();
+	System.out.println(b);
     }
 
 
