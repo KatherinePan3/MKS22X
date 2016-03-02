@@ -87,6 +87,8 @@ public class Maze{
         }
 	if(maze[x][y]=='E'){
 	    return true;
+	}else{
+	    maze[x][y]='@';
 	}
 
 	if(maze[x][y]!='#' || maze[x][y]!='.' || maze[x][y]!='@'){
