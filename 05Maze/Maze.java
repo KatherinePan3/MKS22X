@@ -131,13 +131,18 @@ public class Maze{
         if(animate){
             ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
         }
-	for(int i=0;i<maxx;i++){
-	    for(int j=0;j<maxy;j++){
-		ans+=maze[i][j];
-	    }
-	    ans+="\n";
-	}
-	return ans;
+        for(int i = 0; i < maxx * maxy; i++){
+            if(i % maxx == 0 && i != 0){
+                ans += "\n";
+            }
+            char c =  maze[i % maxx][i / maxx];
+            if(c == '#'){
+                ans += color(38,47)+c;
+            }else{
+                ans += color(33,40)+c;
+            }
+        }
+        return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
     }
 
     //MORE FREE STUFF!!! *you can ignore all of this*
@@ -169,9 +174,9 @@ public class Maze{
 
   
     public static void main(String[]args){
-	Maze b = new Maze("maze.txt",false);
+	Maze b = new Maze("maze.txt",true);
 	b.solve();
-	System.out.println(b);
+	//	System.out.println(b);
     }
 
 
