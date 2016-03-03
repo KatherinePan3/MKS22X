@@ -39,4 +39,17 @@ public class Sorts{
 	    }
 	}
     }
+
+
+    public static void merge(int[] data,int Sa,int Ea, int Sb,int Eb){
+	int length = Eb-Sa+1;
+	int[] num = new int[length];
+	int minA=0;
+	int minB=0;
+	for(int i=0;i<length;i++){
+	    for(int a=Sa;a<=Ea;a++){
+		
+		
+	    
+    }
 }
