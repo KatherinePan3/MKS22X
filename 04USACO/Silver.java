@@ -42,62 +42,69 @@ public class Silver{
 	int a= commands[1][0]-1;
 	int b= commands[1][1]-1;
 	grid[x][y]=1;
-	solveH(x,y);
+        for(int i=0;i<seconds;i++){
+	    grid= solveH();
+	    //	    System.out.println(toString());
+	}
 	return grid[a][b];
     }
 
-    public void solveH(int x,int y){
-	for(int i=0;i<seconds;i++){
+    public int[][] solveH(){
+	int[][] other = new int[row][col];
 	    for(int a=0;a<row;a++){
 		for(int b=0;b<col;b++){
-		    addsur(a,b);}
+		    if(grid[a][b]!=-1){
+			other[a][b]=addsur(a,b);
+		    }
+		    else{
+			other[a][b]=-1;}
+		}
 	    }
-	}
+	    return other;
+	
     }
 
-    public void  addsur(int x,int y){
+    public int  addsur(int x,int y){
 	int sum = 0;
-	if(isSafe(x+1,y)&& grid[x+1][y]!=-1){
+	if(isSafe(x+1,y)&& grid[x+1][y]>=0){
 	    sum+=grid[x+1][y];
 	}
-	if(isSafe(x,y+1)&& grid[x][y+1]!=-1){
+	if(isSafe(x,y+1)&& grid[x][y+1]>=0){
 	    sum+=grid[x][y+1];
 	}
-	if(isSafe(x-1,y) && grid[x-1][y]!=-1){
+	if(isSafe(x-1,y) && grid[x-1][y]>=0){
 	    sum+=grid[x-1][y];
 	}
-	if(isSafe(x,y-1)&& grid[x][y-1]!=-1){
+	if(isSafe(x,y-1)&& grid[x][y-1]>=0){
 	    sum+=grid[x][y-1];
 	}
-	System.out.println(sum);
-	grid[x][y]=sum;
+	return sum;
+
     }
 
     public boolean isSafe(int x,int y){
 	if(x>=row || y>=col || x<0 ||y<0){
-	    System.out.println("notsafe");
 	    return false;
 	}
-	System.out.println("safe");
 	return true;
     }
 
-    public String toString(){
+    /* public String toString(){
 	String str = "";
 	for(int i=0;i<row;i++){
 	    for(int j=0;j<col;j++){
-		str+=grid[i][j];
+		str+=grid[i][j]+" ";
 	    }
 	    str+="\n";
 	}
 	return str;
-    }
+	}*/
 
     public static void main(String[]args){
 	Silver b = new Silver("datas.txt");
-	System.out.println(b);
+
         System.out.println(b.solve());
-	System.out.println(b);
+
     }
 
     
