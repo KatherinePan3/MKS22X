@@ -34,14 +34,14 @@ public class Maze{
 	    }
 	    row=mazeStr.size();
 	    col=mazeStr.get(0).length();
-	    maze = new char[row][col];
+	    maze = new char[col][row];
 	    for(int i=0;i<row;i++){
 		String str = mazeStr.get(i);
 		for(int j=0;j<col;j++){
-		    maze[i][j]=str.charAt(j);
-		    if(maze[i][j]=='S'){
-			startx=i;
-			starty=j;
+		    maze[j][i]=str.charAt(j);
+		    if(maze[j][i]=='S'){
+			startx=j;
+			starty=i;
 		    }
 		}
 	    }
