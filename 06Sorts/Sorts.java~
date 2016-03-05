@@ -1,4 +1,3 @@
-import java.util.Arrays;
 public class Sorts{
     public static void SelectionSort(int[] num){
 	int first;
@@ -41,48 +40,16 @@ public class Sorts{
 	}
     }
 
-    public static void mergeSort(int[] data,int start,int end){
-	if (start<end){
-	    int center =(start+end) /2;
-	    mergeSort(data,start,center);
-	    mergeSort(data,center+1,end);
-	    merge(data,start,center,center+1,end);
-	}
-    }
-
 
     public static void merge(int[] data,int Sa,int Ea, int Sb,int Eb){
 	int length = Eb-Sa+1;
 	int[] num = new int[length];
-	int count = 0;
-	int start = Sa;
-	while(Sa <= Ea && Sb <= Eb && count < length){
-	    if(data[Sa]<=data[Sb]){
-		num[count]=data[Sa];
-		Sa++;
-		count++;}
-	    else{
-		num[count]=data[Sb];
-		Sb++;
-		count++;
-	    }
-	}
-	while(Sa<=Ea){
-	    num[count]=data[Sa];
-	    Sa++;
-	    count++;
-	}
-	while(Sb<=Eb){
-	    num[count]=data[Sb];
-	    Sb++;
-	    count++;
-	}
-	
-	for(int k=0;k<length;k++){
-	    data[start]=num[k];
-	    start++;
-	}
+	int minA=0;
+	int minB=0;
+	for(int i=0;i<length;i++){
+	    for(int a=Sa;a<=Ea;a++){
+		
+		
+	    
     }
-    
-    
 }
