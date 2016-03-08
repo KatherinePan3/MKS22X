@@ -40,12 +40,17 @@ public class Sorts{
 	    }
 	}
     }
+    
 
-    public static void mergeSort(int[] data,int start,int end){
+    public static void mergesort(int[] data){
+	mergesort(data,0,data.length - 1);
+    }
+
+    public static void mergesort(int[] data,int start,int end){
 	if (start<end){
 	    int center =(start+end) /2;
-	    mergeSort(data,start,center);
-	    mergeSort(data,center+1,end);
+	    mergesort(data,start,center);
+	    mergesort(data,center+1,end);
 	    merge(data,start,center,center+1,end);
 	}
     }
@@ -83,6 +88,5 @@ public class Sorts{
 	    start++;
 	}
     }
-    
-    
+
 }
