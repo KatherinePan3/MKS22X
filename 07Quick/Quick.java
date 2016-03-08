@@ -24,8 +24,13 @@ public class Quick{
 	    if(data[right]>=temp){
 		right++;}
 	}
+	int k = 0;
+	if(data[right]<=num){
+	    k=data[right];
+	    data[right]=num;
+	    data[data.length]=k;
+	}
 
-	data[right]=num;
 	return right;
     }
 
