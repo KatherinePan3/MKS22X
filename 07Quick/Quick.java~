@@ -9,22 +9,19 @@ public class Quick{
 	right--;
 	int num=0;
 	while(right>=left){
-	    if(data[left]>=temp){
-		num=data[left];
-		data[left]=data[right];
-		data[right]=num;
+	    if(data[left]>=temp){;
 		right--;}
 	    if(data[right]<=temp){
-		num=data[right];
-		data[right]=data[left];
-		data[left]=num;
 		left++;}
-	    if(data[left]<=temp){
-		left++;}
-	    if(data[right]>=temp){
-		right++;}
+  
 	}
 
-	data[right]=num;
 	return right;
+    }
+
+    public static void main(String[]args){
+	Quick q = new Quick();
+	int[] data = {2,3,5,6,3,4,7,8};
+	System.out.println(q.partition(data,0,7));
+    }
 }
