@@ -1,29 +1,35 @@
 import java.util.*;
 public class Quick{
 
-    private static int[] partition(int[] data,int left,int right){
+    private static int[] partition(int[] data ,int left,int right){
 	int rnd = (int)(Math.random()*(right-left)+left);
-	//	System.out.println(data[rnd]);
-	//	System.out.println(Arrays.toString(data)+" before change");
-	int[] newAry = new int[data.length];
+	int length = right-left+1;
+	int[] newAry = new int[length];
 	int temp=data[rnd];
 	int start = left;
 	int end = right;
+	int newLeft=0;
+	int newRight=length-1;
 	for(int i=left;i<=right;i++){
 	    if(data[i]<temp){
-		newAry[start]=data[i];
+		newAry[newLeft]=data[i];
+		newLeft++;
 		start++;}
 	    if(data[i]>temp){
-		newAry[end]=data[i];
+		newAry[newRight]=data[i];
+		newRight--;
 		end--;}
 	}
 	int[] ans={start,end}; 
-	for(int j=start;j<=end;j++){
+	for(int j=newLeft;j<=newRight;j++){
 	  newAry[j]=temp;
 		}
-	
-	for(int a=left;a<=right;a++){
-		data[a]=newAry[a];
+	int count =0;
+	int a =left;
+	while(a<=right&&count<length-1){
+		data[a]=newAry[count]
+		    a++
+		    count++;
 	    }
 	return ans;
     }
@@ -117,25 +123,31 @@ public class Quick{
 
     public static void main(String[]args){
 	Quick q = new Quick();
-	int[] d = new int[40000];
+	int[] d = new int[4000000];
 	int[] c = new int[d.length];
 	int[] e = new int[d.length];
 	for(int i=0;i<d.length;i++){
-	    d[i]=(int)(Math.random()*3);
+	    d[i]=(int)(Math.random()*Integer.MAX_VALUE);
 	    c[i]=d[i];
 	    e[i]=d[i];
 	}
-	long startTime=System.currentTimeMillis();
-	q.quickSort(d);
-	long endTime=System.currentTimeMillis();
-	System.out.println(endTime-startTime);
+
 	long startTime2=System.currentTimeMillis();
 	Arrays.sort(c);
 	long endTime2=System.currentTimeMillis();
-	System.out.println(endTime2-startTime2);
+	System.out.println("Arrays "+(endTime2-startTime2));
+
+
+	long startTime=System.currentTimeMillis();
+	q.quickSort(d);
+	long endTime=System.currentTimeMillis();
+	System.out.println("quicksort "+(endTime-startTime));
+
+
+
 	long startTime3=System.currentTimeMillis();
-	q.quickSortOld(e);;
+	//q.quickSortOld(e);;
 	long endTime3=System.currentTimeMillis();
-	System.out.println(endTime3-startTime3);
+	System.out.println("old "+(endTime3-startTime3));
     }
 }
