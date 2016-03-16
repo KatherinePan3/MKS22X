@@ -27,9 +27,9 @@ public class Quick{
 	int count =0;
 	int a =left;
 	while(a<=right&&count<length-1){
-		data[a]=newAry[count]
-		    a++
-		    count++;
+	    data[a]=newAry[count];
+	    a++;
+	    count++;
 	    }
 	return ans;
     }
@@ -127,7 +127,7 @@ public class Quick{
 	int[] c = new int[d.length];
 	int[] e = new int[d.length];
 	for(int i=0;i<d.length;i++){
-	    d[i]=(int)(Math.random()*Integer.MAX_VALUE);
+	    d[i]=(int)(Math.random()*3);
 	    c[i]=d[i];
 	    e[i]=d[i];
 	}
@@ -146,7 +146,7 @@ public class Quick{
 
 
 	long startTime3=System.currentTimeMillis();
-	//q.quickSortOld(e);;
+	q.quickSortOld(e);;
 	long endTime3=System.currentTimeMillis();
 	System.out.println("old "+(endTime3-startTime3));
     }
