@@ -1,4 +1,4 @@
-public class MyLinkedList{
+public class MyLinkedList<T>{
     private class LNode{
 	private int value;
 	private LNode next;
@@ -33,7 +33,12 @@ public class MyLinkedList{
 	    p.setNext(end);
 	    size+=1;}
 	return true;}
-
+    
+    public boolean remove(int index){
+	LNode p = head;
+	for(int i=0;i<index;i++){
+	    p=p.getNext();
+	    
 
     public String toString(){
 	String ans = "[";
