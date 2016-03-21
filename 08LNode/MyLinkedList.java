@@ -1,7 +1,7 @@
 public class MyLinkedList{
     private class LNode{
-	int value;
-	LNode next;
+	private int value;
+	private LNode next;
 	public LNode(int v){
 	    value = v;}
 	public int getValue(){
@@ -15,18 +15,23 @@ public class MyLinkedList{
 
     }
 
-    LNode head;
-    int size;
+    private LNode head;
+    private int size;
+    private LNode end;
 
     public boolean add(int value){
 	if(head==null){
-	    head = new LNode(value);}
+	    head = new LNode(value);
+	    end = new LNode(value);
+	    size+=1;
+	}
 	else{
 	    LNode p = head;
 	    while(p.getNext()!=null){
 		p=p.getNext();}
-	    p.setNext(new LNode(value));}
-	size+=1;
+	    end = new LNode(value);
+	    p.setNext(end);
+	    size+=1;}
 	return true;}
 
 

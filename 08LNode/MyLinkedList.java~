@@ -6,11 +6,11 @@ public class MyLinkedList{
 	    value = v;}
 	public int getValue(){
 	    return value;}
-	public int setValue(int v){
+	public void setValue(int v){
 	    value=v;}
-	public int getNext(){
+	public LNode getNext(){
 	    return next;}
-	public int setNext(){
+	public void setNext(LNode n){
 	    next=n;}
 
     }
