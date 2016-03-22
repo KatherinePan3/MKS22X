@@ -21,6 +21,8 @@ public class MyLinkedList<T>{
 
 
     public boolean add(int index,int value){
+	if(!(0<=index || index<=size)){
+	    throw new IndexOutOfBoundsException("index out of bound");}
 	LNode<T> p = head;
 	for(int i=0;i<index;i++){
 	    p=p.getNext();
@@ -47,6 +49,8 @@ public class MyLinkedList<T>{
 	return true;}
     
     public T get(int index){
+	if(!(0<=index && index<size)){
+	    throw new IndexOutOfBoundsException("index out of bound");}
 	LNode<T> p = head;
 	for(int i=0;i<index;i++){
 	    p=p.getNext();
@@ -56,6 +60,8 @@ public class MyLinkedList<T>{
 
 
     public T set(int index,T newValue){
+	if(!(0<=index && index<size)){
+	    throw new IndexOutOfBoundsException("index out of bound");}
 	LNode<T> p = head;
 	for(int i =0;i<index;i++){
 	    p=p.getNext();}
@@ -67,6 +73,8 @@ public class MyLinkedList<T>{
 	    
     
     public T remove(int index){
+	if(!(0<=index && index<size)){
+	    throw new IndexOutOfBoundsException("index out of bound");}	
 	LNode<T> p = head;
 	for(int i=0;i<index;i++){
 	    p=p.getNext();}
