@@ -34,10 +34,38 @@ public class MyLinkedList<T>{
 	    size+=1;}
 	return true;}
     
-    public boolean remove(int index){
+    public int get(int index){
 	LNode p = head;
 	for(int i=0;i<index;i++){
 	    p=p.getNext();
+	}
+	return p.getValue();
+    }
+
+
+    public int set(int index,int newValue){
+	LNode p = head;
+	for(int i =0;i<index;i++){
+	    p=p.getNext();}
+	int num = p.getValue();
+	p.setValue(newValue);
+	return num;
+    }
+
+	    
+    
+    public boolean remove(int index){
+	LNode p = head;
+	for(int i=0;i<index;i++){
+	    p=p.getNext();}
+	int num = p.getValue();
+	if(p==head){
+	    head=p.getNext();}
+	else{
+	    p=p.getNext();
+	}
+	size-+1;
+	return num;}
 	    
 
     public String toString(){
