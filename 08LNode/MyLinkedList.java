@@ -1,4 +1,5 @@
-public class MyLinkedList<T> implements iterable<T>{
+import java.util.*;
+public class MyLinkedList<T> implements Iterable<T>{
     private class LNode<T>{
 	private T value;
 	private LNode<T> next;
@@ -15,27 +16,7 @@ public class MyLinkedList<T> implements iterable<T>{
 
     }
     
-    public Iterator<T> iterator(){
-	return new LLiterator();
-    }
-
-    public class LLiterator implements Iterator<T>{
-	LNode current;
-	public boolean hasNext(){
-	    if(current.getNext()==null){
-		return false;}
-	    return true;
-	}
-	public T next(){
-	    T temp = current.getValue();
-	    current = current.getNext();
-	    return temp;
-	}
-
-	public void remove(){
-	    throw new UnsupportedOperationException("Invalid operation");
-	}
-    }
+  
 
     private LNode<T> head;
     private int size;
@@ -122,6 +103,33 @@ public class MyLinkedList<T> implements iterable<T>{
 
     public int size(){
 	return size;}
+
+
+  public Iterator<T> iterator(){
+	return new LLiterator();
+    }
+
+    public class LLiterator implements Iterator<T>{
+	LNode<T> next;
+	public LLiterator(){
+	    next = head;}
+
+	public boolean hasNext(){
+	    return next != null; 
+	}
+	public T next(){
+	    if(!hasNext()){
+		throw new NoSuchElementException();
+	    }
+	    T temp = next.getValue();
+	    next = next.getNext();
+	    return temp;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOperationException("Invalid operation");
+	}
+    }
 
 
     }
