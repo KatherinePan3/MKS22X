@@ -1,4 +1,4 @@
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements iterable<T>{
     private class LNode<T>{
 	private T value;
 	private LNode<T> next;
@@ -14,24 +14,42 @@ public class MyLinkedList<T>{
 	    next=n;}
 
     }
+    
+    public Iterator<T> iterator(){
+	return new LLiterator();
+    }
+
+    public class LLiterator implements Iterator<T>{
+	LNode current;
+	public boolean hasNext(){
+	    if(current.getNext()==null){
+		return false;}
+	    return true;
+	}
+	public T next(){
+	    T temp = current.getValue();
+	    current = current.getNext();
+	    return temp;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOperationException("Invalid operation");
+	}
+    }
 
     private LNode<T> head;
     private int size;
     private LNode<T> end;
 
 
-    public boolean add(int index,int value){
+    /*public boolean add(int index,int value){
 	if(!(0<=index || index<=size)){
 	    throw new IndexOutOfBoundsException("index out of bound");}
-	LNode<T> p = head;
-	for(int i=0;i<index;i++){
-	    p=p.getNext();
+	if(index==0){
+	    LNode p = head;
+	    
 	}
-	LNode current = p.getValue();
-	p.setNext(current);
-	p= new LNode(value);
-	size++;
-    }
+    }*/
 
     public boolean add(T value){
 	if(head==null){
@@ -106,4 +124,4 @@ public class MyLinkedList<T>{
 	return size;}
 
 
-}
+    }
