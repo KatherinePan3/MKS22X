@@ -102,7 +102,7 @@ public class Driver{
         System.out.println("head: "+m.getHead()+" end: "+m.getEnd()+" "+m.toString());
         System.out.println(n);
 
-        /*test speed of add in front and at end.
+        /*test speed of add in front and at end.*/
         long start,end;
         System.out.println("Add 100k to front");
 
@@ -133,7 +133,7 @@ public class Driver{
         end = System.currentTimeMillis();
         System.out.println( "LinkedList "+(end-start)/1000.0 );
 
-        */
+        
     }
 }
  
