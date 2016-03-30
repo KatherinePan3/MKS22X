@@ -79,6 +79,9 @@ public class Driver{
         System.out.println("head: "+m.getHead()+" end: "+m.getEnd()+" "+m.toString());
         System.out.println(n);
 
+
+	
+
         //test remove random items:
         Random rand = new Random(0);
         for(int i = 0; i < 6000; i++){
@@ -102,7 +105,7 @@ public class Driver{
         System.out.println("head: "+m.getHead()+" end: "+m.getEnd()+" "+m.toString());
         System.out.println(n);
 
-        /*test speed of add in front and at end.*/
+        /*test speed of add in front and at end.
         long start,end;
         System.out.println("Add 100k to front");
 
@@ -131,7 +134,7 @@ public class Driver{
         for(int i = 0; i < 1000000; i++)
             m.add(""+i);
         end = System.currentTimeMillis();
-        System.out.println( "LinkedList "+(end-start)/1000.0 );
+        System.out.println( "LinkedList "+(end-start)/1000.0 );*/
 
         
     }

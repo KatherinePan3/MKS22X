@@ -19,12 +19,12 @@ public class ParenDemo{
 
     
     public static boolean isOpen(String s){
-	if(s.equals("{") || s.equals("(") || s.equals("[")){
+	if(s.equals("{") || s.equals("(") || s.equals("[") || s.equals("<")){
 	    return true;}
 	return false;
     }
     public static boolean isClose(String s){
-	if(s.equals("}") || s.equals(")") || s.equals("]")){
+	if(s.equals("}") || s.equals(")") || s.equals("]")|| s.equals(">")){
 	    return true;}
 	return false;
     }
@@ -35,6 +35,8 @@ public class ParenDemo{
 	    return "{";}
 	if(s.equals("]")){
 	    return "[";}
+	if(s.equals(">")){
+	    return "<";}
 	return " ";
     }
 
