@@ -1,20 +1,40 @@
+import java.io.*;
 public class ParenDemo{
 
-    public boolean isMatching(String s){
-	String open = "({[";
-	String close = ")}]";
+    public static boolean isMatching(String s){
 	MyStack<String> data = new MyStack<String>();
-	
-
+	for(int i=0;i<s.length();i++){
+	    if(isOpen(s.substring(i,i+1))){
+		data.push(s.substring(i,i+1));}
+	    if(isClose(s.substring(i,i+1))){
+		if(opposite(s.substring(i,i+1)).equals(data.peek())){
+		    data.pop();}
+		else{return false;}
+	    }
+	}
+	return true;
     }
+		
+		    
 
-    public String opposite(String s){
-	if(s.equals("(")){
-	    return ")";}
-	if(s.equals("{")){
-	    return "}";}
-	if(s.equals("[")){
-	    return "]";}
+    
+    public static boolean isOpen(String s){
+	if(s.equals("{") || s.equals("(") || s.equals("[")){
+	    return true;}
+	return false;
+    }
+    public static boolean isClose(String s){
+	if(s.equals("}") || s.equals(")") || s.equals("]")){
+	    return true;}
+	return false;
+    }
+    public static String opposite(String s){
+	if(s.equals(")")){
+	    return "(";}
+	if(s.equals("}")){
+	    return "{";}
+	if(s.equals("]")){
+	    return "[";}
 	return " ";
     }
 

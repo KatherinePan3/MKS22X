@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyStack<T>{
     private MyLinkedList<T> data;
     public MyStack(){
@@ -15,6 +16,8 @@ public class MyStack<T>{
      * @exception java.util.NoSuchElementException if the queue is empty.
      */
     public T pop(){
+	if(isEmpty()){
+	    throw new NoSuchElementException();}
 	return data.remove(0);
     }
 
@@ -23,6 +26,9 @@ public class MyStack<T>{
      * @exception java.util.NoSuchElementException if the queue is empty.
      */
     public T peek(){
+	if(isEmpty()){
+	    throw new NoSuchElementException();}
+
 	return data.get(0);
     }
  
