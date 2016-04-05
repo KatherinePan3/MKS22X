@@ -1,15 +1,15 @@
 import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
-    private class LNode<T>{
+    private class LNode{
 	private T value;
-	private LNode<T> next;
+	private LNode next;
 	public LNode(T v){
 	    value = v;}
 	public T getValue(){
 	    return value;}
 	public void setValue(T v){
 	    value=v;}
-	public LNode<T> getNext(){
+	public LNode getNext(){
 	    return next;}
 	public void setNext(LNode n){
 	    next=n;}
@@ -18,19 +18,29 @@ public class MyLinkedList<T> implements Iterable<T>{
     
   
 
-    private LNode<T> head;
+    private LNode head;
     private int size;
-    private LNode<T> end;
+    private LNode end;
 
 
-    /*public boolean add(int index,int value){
-	if(!(0<=index || index<=size)){
+    public boolean add(int index,T value){
+	if(!(0<=index &&  index<=size)){
 	    throw new IndexOutOfBoundsException("index out of bound");}
+        LNode p = head;
+	LNode temp = new LNode(value);
 	if(index==0){
-	    LNode p = head;
-	    
+	    temp.setNext(head);
+	    head = temp;
 	}
-    }*/
+	else{
+	    for(int i=0;i<index-1;i++){
+		p=p.getNext();}
+	    temp.setNext(p.getNext());
+	    p.setNext(temp);
+	}
+	size++;
+	return true;
+    }
 
     public boolean add(T value){
 	if(head==null){
@@ -50,7 +60,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public T get(int index){
 	if(!(0<=index && index<size)){
 	    throw new IndexOutOfBoundsException("index out of bound");}
-	LNode<T> p = head;
+	LNode p = head;
 	for(int i=0;i<index;i++){
 	    p=p.getNext();
 	}
@@ -61,7 +71,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public T set(int index,T newValue){
 	if(!(0<=index && index<size)){
 	    throw new IndexOutOfBoundsException("index out of bound");}
-	LNode<T> p = head;
+	LNode p = head;
 	for(int i =0;i<index;i++){
 	    p=p.getNext();}
 	T num = p.getValue();
@@ -74,17 +84,38 @@ public class MyLinkedList<T> implements Iterable<T>{
     public T remove(int index){
 	if(!(0<=index && index<size)){
 	    throw new IndexOutOfBoundsException("index out of bound");}	
-	LNode<T> p = head;
-	for(int i=0;i<index;i++){
-	    p=p.getNext();}
-	T num = p.getValue();
-	if(p==head){
+	LNode p = head;
+	T num;
+	if(index == 0){
+	    num = head.getValue();
 	    head=p.getNext();}
+	else if(index == (size-1)){
+	    for(int i=0;i<index-1;i++){
+		p=p.getNext();}
+	    num = p.getNext().getValue();
+	    p.setNext(p.getNext().getNext());
+	    end = p;
+	}
+	    
 	else{
-	    p=p.getNext();
+	    for(int i=0;i<index-1;i++){
+		p=p.getNext();}
+	    num = p.getNext().getValue();
+	    p.setNext(p.getNext().getNext());
 	}
 	size-=1;
 	return num;}
+
+    public String getHead(){
+	String ans = "";
+	ans+=head.getValue();
+	return ans;
+    }
+    public String getEnd(){
+	String ans = "";
+	ans+=end.getValue();
+	return ans;
+    }
 	    
 
     public String toString(){
@@ -110,7 +141,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     public class LLiterator implements Iterator<T>{
-	LNode<T> next;
+	LNode next;
 	public LLiterator(){
 	    next = head;}
 
@@ -129,6 +160,14 @@ public class MyLinkedList<T> implements Iterable<T>{
 	public void remove(){
 	    throw new UnsupportedOperationException("Invalid operation");
 	}
+    }
+
+    public static void main(String[]args){
+	MyLinkedList<Integer> data = new MyLinkedList<Integer>();
+	for(int i=0;i<10;i++){
+	    data.add(i);}
+	for(Integer i:data){
+	    System.out.println(i);}
     }
 
 
