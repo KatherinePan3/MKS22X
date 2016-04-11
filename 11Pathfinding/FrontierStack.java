@@ -14,7 +14,7 @@ public class FrontierStack<T> implements Frontier<T>{
     {return frontier.isEmpty();}
     public T next(){
 	if(hasNext()){
-	    return current;}
+	    frontier.peek();}
 	else{
 	    throw new NoSuchElementException();}
     }
