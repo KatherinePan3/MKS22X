@@ -162,13 +162,5 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
     }
 
-    public static void main(String[]args){
-	MyLinkedList<Integer> data = new MyLinkedList<Integer>();
-	for(int i=0;i<10;i++){
-	    data.add(i);}
-	for(Integer i:data){
-	    System.out.println(i);}
-    }
-
 
     }

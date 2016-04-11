@@ -2,7 +2,7 @@ import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
     private class LNode{
 	private T value;
-	private LNode next,prev;
+	private LNode next;
 	public LNode(T v){
 	    value = v;}
 	public T getValue(){
@@ -13,10 +13,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    return next;}
 	public void setNext(LNode n){
 	    next=n;}
-	public LNode getPrev(){
-	    return prev;}
-	public void setPrev(LNode n){
-	    prev = n;}
 
     }
     
@@ -32,20 +28,15 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    throw new IndexOutOfBoundsException("index out of bound");}
         LNode p = head;
 	LNode temp = new LNode(value);
-	if(index==0&&size!=0){
+	if(index==0){
 	    temp.setNext(head);
-	    head.setPrev(temp);
 	    head = temp;
 	}
-	else if(index==size){
-	    add(value);
-	}
 	else{
-	    LNode temp2 = getNth(index);
-	    temp2.setNext(p.getNext());
-	    temp2.setPrev(p);
-	    p.getNext().setPrev(temp2);
-	    p.setNext(temp2);
+	    for(int i=0;i<index-1;i++){
+		p=p.getNext();}
+	    temp.setNext(p.getNext());
+	    p.setNext(temp);
 	}
 	size++;
 	return true;
@@ -58,12 +49,13 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    size+=1;
 	}
 	else{
-	    LNode added = new LNode(value);
-	    added.setPrev(end);
-	    end.setNext(added);
-	    end=end.getNext();}
-	    size+=1;
-	    return true;}
+	    LNode p = head;
+	    while(p.getNext()!=null){
+		p=p.getNext();}
+	    end = new LNode(value);
+	    p.setNext(end);
+	    size+=1;}
+	return true;}
     
     public T get(int index){
 	if(!(0<=index && index<size)){
@@ -101,7 +93,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    for(int i=0;i<index-1;i++){
 		p=p.getNext();}
 	    num = p.getNext().getValue();
-	    p.getNext().getNext().setPrev(p);
 	    p.setNext(p.getNext().getNext());
 	    end = p;
 	}
@@ -110,7 +101,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    for(int i=0;i<index-1;i++){
 		p=p.getNext();}
 	    num = p.getNext().getValue();
-	    p.getNext().getNext().setPrev(p);
 	    p.setNext(p.getNext().getNext());
 	}
 	size-=1;
@@ -144,14 +134,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public int size(){
 	return size;}
-    
-    private LNode getNth(int index){
-	LNode temp = head;
-	while(index>0){
-	    temp=temp.getNext();
-	    index--;}
-	return temp;
-    }
 
 
   public Iterator<T> iterator(){
@@ -178,14 +160,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 	public void remove(){
 	    throw new UnsupportedOperationException("Invalid operation");
 	}
-    }
-
-    public static void main(String[]args){
-	MyLinkedList<Integer> data = new MyLinkedList<Integer>();
-	for(int i=0;i<10;i++){
-	    data.add(i);}
-	for(Integer i:data){
-	    System.out.println(i);}
     }
 
 
