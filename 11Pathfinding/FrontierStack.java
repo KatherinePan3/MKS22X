@@ -5,17 +5,16 @@ public class FrontierStack<T> implements Frontier<T>{
     /***You can extend another class OR wrap around it***/
 
     public Stack<T> frontier;
-    public T current;
     public FrontierStack(){
 	frontier=new Stack<T>();}
     public void add(T element){
 	frontier.push(element);}
     public boolean hasNext()
-    {return frontier.isEmpty();}
+    {return !frontier.isEmpty();}
     public T next(){
-	if(hasNext()){
-	    frontier.peek();}
-	else{
+	if(!hasNext()){
 	    throw new NoSuchElementException();}
+	return frontier.pop();
+    
     }
 }

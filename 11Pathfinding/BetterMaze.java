@@ -3,8 +3,120 @@ import java.io.*;
 
 public class BetterMaze{
     private class Node{
+	private int[] rc;
+	private Node prev;
+	
+	public Node(int r, int c, Node n){
+	    rc = new int[2];
+	    rc[0]=r;
+	    rc[1]=c;
+	    prev = n;
+	}
 
+	public Node getprev(){
+	    return prev;}
+	public int[] getLocation(){
+	    return rc;}
     }
+
+
+
+
+    private char[][] maze;
+    private int[]    solution;
+    private int      startRow,startCol;
+    private Frontier<Node> placesToGo;
+    private boolean  animate;//default to false
+
+   /**return a COPY of solution.
+     *This should be : [x1,y1,x2,y2,x3,y3...]
+     *the coordinates of the solution from start to end.
+     *Precondition : one of the solveXXX methods has already been 
+     * called (solveBFS OR solveDFS OR solveAStar)
+     *(otherwise an empty array is returned)
+     *Postcondition:  the correct solution is in the returned array
+    **/
+    public int[] solutionCoordinates(){
+        /** IMPLEMENT THIS **/      
+	return new int[1];
+    }    
+
+
+    /**initialize the frontier as a queue and call solve
+    **/
+    public boolean solveBFS(){  
+        /** IMPLEMENT THIS **/ 
+
+	placesToGo=new FrontierQueue();
+	return solve();
+    }   
+
+
+   /**initialize the frontier as a stack and call solve
+    */ 
+    public boolean solveDFS(){  
+        /** IMPLEMENT THIS **/  
+	placesToGo = new FrontierStack();
+	return solve();
+    }    
+
+   /**Search for the end of the maze using the frontier. 
+      Keep going until you find a solution or run out of elements on the frontier.
+    **/
+    private boolean solve(){  
+	placesToGo.add(new Node(startRow,startCol,null));
+	
+        /** IMPLEMENT THIS **/  
+	return false;
+    }    
+     
+   /**mutator for the animate variable  **/
+    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+
+
+    public BetterMaze(String filename){
+	animate = false;
+	int maxc = 0;
+	int maxr = 0;
+	startRow = -1;
+	startCol = -1;
+	//read the whole maze into a single string first
+	String ans = "";
+	try{
+	    Scanner in = new Scanner(new File(filename));
+
+	    //keep reading next line
+	    while(in.hasNext()){
+		String line = in.nextLine();
+		if(maxr == 0){
+		    //calculate width of the maze
+		    maxc = line.length();
+		}
+		//every new line add 1 to the height of the maze
+		maxr++;
+		ans += line;
+	    }
+	}
+	catch(Exception e){
+	    System.out.println("File: " + filename + " could not be opened.");
+	    e.printStackTrace();
+	    System.exit(0);
+	}
+	System.out.println(maxr+" "+maxc);
+	maze = new char[maxr][maxc];
+	for(int i = 0; i < ans.length(); i++){
+	    char c = ans.charAt(i);
+	    maze[i / maxc][i % maxc] = c;
+	    if(c == 'S'){
+		startCol = i % maxc;
+		startRow = i / maxc;
+	    }
+	}
+    }
+
+
+
+
 
 
 
@@ -60,7 +172,4 @@ public class BetterMaze{
 
 
        
-    
-    
-
 }
