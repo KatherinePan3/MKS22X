@@ -15,10 +15,10 @@ public class MyDeque<T>{
 	T[] newData = (T[]) new Object[data.length*2];
 	int num = start;
 	for(int i=0;i<size;i++){
-	    if(num==size){
-		num=0;}
 	    newData[i]=data[num];
-	    num++;
+	    if(num==data.length-1){
+		num=0;}
+	    else{num++;}
 	}
 	start=0;
 	end=size-1;
@@ -26,12 +26,12 @@ public class MyDeque<T>{
     }
 
     public void addFirst(T value){
-	if(size==data.length){
+	if(size==data.length-1){
 	    grow();}
 	if(data[start]==null){
 	    data[start]=value;}
 	if(start==0){
-	    start=size-1;
+	    start=data.length-1;
 	    data[start]=value;}
 	else if(start>=1){
 	    start--;
@@ -40,14 +40,14 @@ public class MyDeque<T>{
     }
 
     public void addLast(T value){
-	if(size==data.length){
+	if(size==data.length-1){
 	    grow();}
 	if(data[end]==null){
 	    data[end]=value;}
-	if(end==size-1){
+	if(end==data.length-1){
 	    end=0;
 	    data[end]=value;}
-	else if(end<size){
+	else if(end<data.length-1){
 	    end++;
 	    data[end]=value;}
 	size++;
@@ -59,10 +59,11 @@ public class MyDeque<T>{
 	    throw new NoSuchElementException();}
 	T obj = data[start];
 	data[start]=null;
-	if(start==size-1){
+	if(start==data.length-1){
 	    start=0;}
 	else{
 	    start++;}
+	size--;
 	return obj;
     }
 
@@ -73,9 +74,10 @@ public class MyDeque<T>{
 	T obj=data[end];
 	data[end]=null;
 	if(end==0){
-	    end=size-1;}
+	    end=data.length-1;}
 	else{
 	    end--;}
+	size--;
 	return obj;}
     
     public T getFirst(){
