@@ -3,20 +3,23 @@ import java.io.*;
 
 public class BetterMaze{
     private class Node{
-	private int[] rc;
+	private int r;
+	private int c;
 	private Node prev;
 	
-	public Node(int r, int c, Node n){
-	    rc = new int[2];
-	    rc[0]=r;
-	    rc[1]=c;
+	public Node(int row, int col, Node n){
+	    r=row;
+	    c=col;
 	    prev = n;
 	}
 
 	public Node getprev(){
 	    return prev;}
-	public int[] getLocation(){
-	    return rc;}
+	public int getLocationRow(){
+	    return r;}
+	public int getLocationCol(){
+	    return c;}
+
     }
 
 
@@ -46,8 +49,8 @@ public class BetterMaze{
     **/
     public boolean solveBFS(){  
         /** IMPLEMENT THIS **/ 
-
-	placesToGo=new FrontierQueue();
+	
+	placesToGo=new FrontierQueue<Node>();
 	return solve();
     }   
 
@@ -56,7 +59,7 @@ public class BetterMaze{
     */ 
     public boolean solveDFS(){  
         /** IMPLEMENT THIS **/  
-	placesToGo = new FrontierStack();
+	placesToGo = new FrontierStack<Node>();
 	return solve();
     }    
 
@@ -65,13 +68,63 @@ public class BetterMaze{
     **/
     private boolean solve(){  
 	placesToGo.add(new Node(startRow,startCol,null));
-	
-        /** IMPLEMENT THIS **/  
+	Node current = new Node(startRow,startCol,null);
+	while(placesToGo.hasNext()){
+	    current=placesToGo.next();
+	    if(maze[current.getLocationRow()][current.getLocationCol()]=='E'){
+		return true;
+	    }else{
+		maze[current.getLocationRow()][current.getLocationCol()]='.';}
+	    for(int i=0;i<4;i++){
+		if(isSafe(current.getLocationRow(),current.getLocationCol()+1)){
+		    placesToGo.add(new Node(current.getLocationRow(),current.getLocationCol()+1,current));
+		}
+		else if(maze[current.getLocationRow()][current.getLocationCol()+1]=='E'){
+		    solution[0]=current.getLocationRow();
+		    solution[1]=current.getLocationCol()+1;
+		}
+		if(isSafe(current.getLocationRow(),current.getLocationCol()-1)){
+		    placesToGo.add(new Node(current.getLocationRow(),current.getLocationCol()-1,current));
+		}
+		else if(maze[current.getLocationRow()][current.getLocationCol()-1]=='E'){
+		    solution[0]=current.getLocationRow();
+		    solution[1]=current.getLocationCol()-1;
+		}
+		if(isSafe(current.getLocationRow()+1,current.getLocationCol())){
+		    placesToGo.add(new Node(current.getLocationRow()+1,current.getLocationCol(),current));
+		}
+		else if(maze[current.getLocationRow()+1][current.getLocationCol()]=='E'){
+		    solution[0]=current.getLocationRow()+1;
+		    solution[1]=current.getLocationCol();
+		}
+		if(isSafe(current.getLocationRow()-1,current.getLocationCol())){
+		    placesToGo.add(new Node(current.getLocationRow()-1,current.getLocationCol(),current));
+		}
+		else if(maze[current.getLocationRow()-1][current.getLocationCol()]=='E'){
+		    solution[0]=current.getLocationRow()-1;
+		    solution[1]=current.getLocationCol();
+		}
+	    }
+	    if(animate){
+		wait(10);
+		System.out.println(this);
+	    }
+		
+	}
 	return false;
-    }    
+    }
+
+    private boolean isSafe(int row,int col){
+	if(row>=0 && row<maze.length && col>=0 && col<maze[0].length && maze[row][col]!='.' && maze[row][col]!='#'){
+	    return true;}
+	else{
+	    return false;}
+    }
+
+      
      
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){animate = b;}    
 
 
     public BetterMaze(String filename){
