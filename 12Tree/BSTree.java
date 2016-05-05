@@ -29,25 +29,38 @@ public class BSTree<T extends comparable<T>>{
 
 	//real methods here
 	public int height(){ 
-	    if(left.height()>right.height()){
+	    if(getLeft().height()>getRight().height()){
 		return left.height()+1;
 	    }
-	    else if(right.height()>left.height()){
-		return right.height()+1;}
-	    retuen left.height()+1;}
+	    else if(getRight().height()>getLeft().height()){
+		return getRight().height()+1;}
+	    retuen getLeft().height()+1;}
 	    
 	}
 	public void add(T value){
-	    if(left==null){
-		left.setData(value);}
-	    else{
-		right.setData(value);}
+	    if(data==null){
+		data=value;}
+	    if(value.compareTo(getData())<=0){
+		if(getLeft()==null){
+		    setLeft(new Node(value));}
+		if(getRight()==null){
+		    setRight(new Node(value));}
+	    }else{
+		if(getRight()==null){
+		    setRight(new Node(value));}
+		else{getRight().add(value);}
+	    }
 	}
 	public String toString(){
-	    return "";
+	    String str = "";
+	    str= str +getData()+left.getData()+right.getData();
+	    return str;
+	    
 	}
 	public boolean contains(T value){
-	    if(
+	    if(data==null){
+		return false;}
+	    return true;
 	}
     
     }
@@ -63,6 +76,9 @@ public class BSTree<T extends comparable<T>>{
 
 	public void add(T value){
 	    //check for empty before you do things with root.
+	    if(root.getData()==null){
+		root = new Node(value);}
+	    root.add(value);
 	}
 	public String toString(){
 	    //check for empty before you do things with root.
@@ -70,6 +86,6 @@ public class BSTree<T extends comparable<T>>{
 	}
 	public boolean contains(T value){
 	    //check for empty before you do things with root.
-	    return false;
+	    return root.contains(value);
 	}
     }
