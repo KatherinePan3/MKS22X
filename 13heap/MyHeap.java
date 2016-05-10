@@ -17,7 +17,9 @@ public class MyHeap<T extends Comparable<T>>
    private void pushDown(int k){
        if(hasChildren(k)){
 	   if(data[k].compareTo(data[k*2])<0){
-	       swap(k,k*2);}
+	       swap(k,k*2);
+	       
+	   }
 	   if(data[k].compareTo(data[k*2+1])<0){
 	       swap(k,k*2+1);}
        }
@@ -54,9 +56,8 @@ public class MyHeap<T extends Comparable<T>>
        return value;
    }
    public void add(T x){
-       if(size==0){
-	   data[1]=x;
-	   size++;}
+       if(size==data.length-1){
+	   doubleSize();}
        else{
 	   data[size+1]=x;
 	   heapify();
