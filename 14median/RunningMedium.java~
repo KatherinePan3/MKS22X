@@ -1,0 +1,14 @@
+public class RunningMedian{
+    private MyHeap maxH;
+    private MyHeap minH;
+    public RunningMedian(){
+    }
+
+    public double getMedian(){
+    }
+
+    public void add(Integer x){
+    }
+
+
+}
