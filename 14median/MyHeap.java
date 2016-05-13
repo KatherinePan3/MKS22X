@@ -107,7 +107,8 @@ public class MyHeap<T extends Comparable<T>>
        max=isMax;
        heapify();
    }
-
+   public int getSize(){
+       return size;}
    public int compareTo(T child, T otherChild){
        if(max){
 	   return child.compareTo(otherChild);}

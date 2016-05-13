@@ -4,6 +4,7 @@ public class MyHeap<T extends Comparable<T>>
 {
    private int size;
    private T[] data;
+   private boolean max;
 
    public MyHeap(){
        size=0;
@@ -16,57 +17,54 @@ public class MyHeap<T extends Comparable<T>>
    }
    private void pushDown(int k){
        if(hasChildren(k)){
-	   if(data[k].compareTo(data[k*2])<0){
-	       swap(k,k*2);}
-	   if(data[k].compareTo(data[k*2+1])<0){
-	       swap(k,k*2+1);}
+	   if(compareTo(data[k],data[k*2])<0){
+	       swap(k,k*2);
+	       pushDown(k*2);
+	       
+	   }
+	   if(compareTo(data[k],data[k*2+1])<0){
+	       swap(k,k*2+1);
+	       pushDown(k*2);
+	   }
        }
    }
    private void pushUp(int k){
-       if(data[k/2].compareTo(data[k])<0){
-	   swap(k/2,k);
-       }
+       if(k>1 && compareTo(data[k/2],data[k])<0){
+	       swap(k/2,k);
+	       pushUp(k/2);
+	   }
+      
    }
    private void heapify(){
-       if(size>0){
-	   heapHelp(1);
-       }	   
-   }
-   private void heapHelp(int k){
-       if(hasChildren(k)){
-	   if(data[k].compareTo(data[k*2])<0){
-	       pushDown(k);
-	       heapHelp(k*2);
-	   }
-	   if(data[k].compareTo(data[k*2+1])<0){
-	       pushDown(k);
-	       heapHelp(k*2+1);
-	   }
+       for(int i= size/2;i>0;i--){
+	   pushDown(i);
        }
    }
 	   
    public T delete(){
-       T value = data[1];
+       if(size==0){
+	   throw new NoSuchElementException();
+       }
+       T value = peek();
        swap(1,size);
-       for(int i=0;i<size;i=i*2+1){
-	   pushDown(i);}
+       data[size]=null;
        size--;
+       pushDown(1);
        return value;
    }
    public void add(T x){
-       if(size==0){
-	   data[1]=x;
-	   size++;}
+       if(size==data.length-1){
+	   doubleSize();}
        else{
 	   data[size+1]=x;
-	   heapify();
+	   pushUp(size+1);
 	   size++;}
        
    }
    private void doubleSize(){
        T[] newStuff = (T[])new Comparable[size*2];
        for(int i=0;i<size;i++){
-	   newStuff[1]=data[1];
+	   newStuff[i]=data[i];
        }
        data=newStuff;
    }
@@ -79,6 +77,11 @@ public class MyHeap<T extends Comparable<T>>
        return str;
    }
  
+   public T peek(){
+       if(size==0){
+	   throw new NoSuchElementException();}
+       return data[1];
+   }
    public void swap(int x,int y){
        T temp;
        temp=data[x];
@@ -91,5 +94,25 @@ public class MyHeap<T extends Comparable<T>>
 	   return true;}
        return false;
    }
+
+   public MyHeap(boolean isMax){
+       data=(T[]) new Comparable[5];
+       max=isMax;
+   }
+   public MyHeap(T[] array, boolean isMax){
+       data=array;
+       size=array.length;
+       max=isMax;
+       heapify();
+   }
+
+   public int compareTo(T child, T otherChild){
+       if(max){
+	   return child.compareTo(otherChild);}
+       else{
+	   return -1*(child.compareTo(otherChild));
+       }
+   }
+       
 }
 
